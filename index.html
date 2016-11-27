@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="asset/paper-full.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.1/howler.min.js"></script>
+    <script type="text/javascript" src="sounds.js"></script>
+    <script type="text/paperscript" canvas="myCanvas">
+
+      var theCircles = [];
+
+      function onKeyDown(event){
+        if (soundObject[event.key]) {
+          var maxPoint = new Point(view.size.width, view.size.height);
+          var randomPoint = new Point(Math.random(), Math.random());
+          var newPoint = maxPoint * randomPoint;
+          // var newPoint = Point.random() * view.size;
+          var myCircle = new Path.Circle(newPoint, 500);
+          myCircle.fillColor = soundObject[event.key].color;
+          soundObject[event.key].sound.play();
+          theCircles.push(myCircle);
+        }
+      }
+
+      function onFrame(event) {
+        for (i=0; i<theCircles.length; i++){
+          theCircles[i].fillColor.hue += 1;
+          theCircles[i].scale(0.9);
+        }
+      }
+
+    </script>
+  </head>
+
+  <body>
+    <canvas id="myCanvas" resize></canvas>
+    <h2 class="header-text">Hello Canvas</h2>
+  </body>
+</html>
