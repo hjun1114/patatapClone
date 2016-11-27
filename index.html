@@ -17,6 +17,7 @@
           var randomPoint = new Point(Math.random(), Math.random());
           var newPoint = maxPoint * randomPoint;
           // var newPoint = Point.random() * view.size;
+          // this basically gives same result accoriding to paper.js
           var myCircle = new Path.Circle(newPoint, 500);
           myCircle.fillColor = soundObject[event.key].color;
           soundObject[event.key].sound.play();
@@ -28,6 +29,10 @@
         for (i=0; i<theCircles.length; i++){
           theCircles[i].fillColor.hue += 1;
           theCircles[i].scale(0.9);
+          if (theCircles[i].area < 1){
+            theCircles[i].remove();
+            theCircles.splice(i,1);
+          }
         }
       }
 
@@ -36,6 +41,6 @@
 
   <body>
     <canvas id="myCanvas" resize></canvas>
-    <h2 class="header-text">Hello Canvas</h2>
+    <h2 class="header-text">Touch Any Keys!</h2>
   </body>
 </html>
